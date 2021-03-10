@@ -1,0 +1,101 @@
+{% extends "layout-tasks.html" %}
+
+{% block register %}
+  {% include "./_register-view.html" %}
+{% endblock %}
+
+{% block tasks %}
+
+  <div>
+    <form method="post">
+
+      <div class="checklist" data-testid="task-checklist-container">
+        <div class="checklist-header">
+          <h2 class="govuk-heading-m">Verified by automation</h2>
+          <p class="govuk-body govuk-body__extra-margin">You do not need to check these details.</p>
+        </div>
+        <div class="checklist-container">
+          <div class="checklist-items">
+            <h3 class="govuk-heading-s">Daylist</h3>
+            <ul class="govuk-list govuk-list--bullet">
+              <li>No prior applications</li>
+            </ul>
+            <br>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="govuk-heading-m casework-tasks-heading" style="border-top:2px solid #0b0c0c;">
+        Your tasks
+      </h2>
+
+  {%include "includes/notification-warning.html" %}
+
+
+      {{ govukRadios({
+        idPrefix: 'property-match',
+        name: 'property-match',
+        classes: 'js-yes-return-to-workflow / govuk-radios--small govuk-radios--inline',
+        fieldset: {
+          legend: {
+            html: 'Does the property match?',
+            classes: 'govuk-fieldset__legend--s'
+          }
+        },
+        items: [
+          {
+            html: 'Yes',
+            value: 'Yes',
+            checked: checked('property-match','Yes')
+          },
+          {
+            html: 'No',
+            value: 'No',
+            checked: checked('property-match','No')
+          }
+        ]
+      }) }}
+
+      {{ govukRadios({
+        idPrefix: 'customer-match',
+        name: 'customer-match',
+        classes: 'js-no-return-to-workflow / govuk-radios--small govuk-radios--inline',
+        fieldset: {
+          legend: {
+            html: 'Do following customer details match documents?',
+            classes: 'govuk-fieldset__legend--s'
+          }
+        },
+        hint: {
+          html: '<ul class="govuk-list govuk-list--bullet">
+                  <li>Key number: 6596212</li>
+                  <li>Customer name(s): Perry, Barton & Shaw LLP & Affiliates</li>
+                </ul>'
+        },
+        items: [
+          {
+            html: 'Yes',
+            value: 'Yes',
+            checked: checked('customer-match','Yes')
+          },
+          {
+            html: 'No',
+            value: 'No',
+            checked: checked('customer-match','No')
+          }
+        ]
+      }) }}
+
+      <div class="task-lists-submit">
+        {{ govukButton({
+          html: 'Next'
+        }) }}
+
+        <a href="complete--return-to-workflow" class="reject-button">Return to workflow</a>
+      </div>
+
+    </form>
+  </div>
+{% endblock %}
+
+{% block pageScripts %}{% endblock %}

@@ -1,7 +1,7 @@
 {#- We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework. -#}
 {%- set assetPath = '/govuk/assets' -%}
 
-{% extends "govuk/template.njk" %}
+{% extends "template.njk" %}
 
 {% from "govuk/components/accordion/macro.njk"           import govukAccordion %}
 {% from "govuk/components/back-link/macro.njk"           import govukBackLink %}
@@ -41,9 +41,10 @@
 {% block header %}
   {% include "includes/cookie-banner.html" %}
   {# Set serviceName in config.js. #}
-  <header class="govuk-header " role="banner" data-module="govuk-header">
-    <div class="govuk-header__container govuk-width-container">
-      <div class="govuk-header__logo">
+  <header class="govuk-header" role="banner" data-module="govuk-header">
+    <div class="govuk-header__container width-container">
+      <div class="govuk-header__logo govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
         <a href="/" class="govuk-header__link govuk-header__link--homepage">
           <span class="govuk-header__logotype">
             <span class="govuk-header__logotype-text">
@@ -51,37 +52,37 @@
             </span>
           </span>
         </a>
+        </div>
+        <div class="govuk-grid-column-one-half">
+        <h2 style="float:right; margin:0;">
+          <span class="govuk-header__logotype" >
+            <span class="govuk-header__logotype-text">
+              Transfer
+            </span>
+          </span>
+        </h2>
+        </div>
       </div>
-    </div>
+      </div>
   </header>
 {% endblock %}
 
 {% block content %}
-  <div id="content" class="hmlr-grid-column hmlr-grid-column--main undefined">
-    <div class="info-panel hmlr-body">
-      <h1 class="govuk-heading-m govuk-!-margin-top-0 govuk-!-margin-bottom-0">
-        {{ tasksHeader | d('Complete tasks for application') }}
-      </h1>
-      <span>{{ appType | d('Transfer') }}</span>
-      <span>Title number: {{ titleNumber | d('BGL109003') }}</span>
-      <span>
-        <a href="{{ docView | d('document-viewer') }}" class="govuk-link document-link js-documents-window" target="_blank">Open all documents</a>
-      </span>
-    </div>
-    <div class="hmlr-tasks-row">
-      <div class="hmlr-register-column">
+
+    <div class="register-container">
+      <div class="register-column">
         {% block register %}{% endblock %}
       </div>
-      <div class="hmlr-tasks-column">
+      <div class="tasks-column">
         {% block tasks %}{% endblock %}
       </div>
     </div>
-  </div>
+
 {% endblock %}
 
 {% block footer %}
   <footer class="govuk-footer" role="contentinfo">
-    <div class="govuk-width-container ">
+    <div class="govuk-width-container">
 
       <div class="govuk-footer__meta">
         <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
